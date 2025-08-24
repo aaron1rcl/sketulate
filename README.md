@@ -20,8 +20,12 @@ from sketulate import Sketulate, SketulateInteraction
 
 # Draw a univariate function
 f1 = Sketulate(x_min=0, x_max=10, y_min=-5, y_max=5)
-f1.ui()
+f1.sketch()
 f1.accept(callback)  # After drawing, click Accept
+# F1 is a now a ready to use function via
+f1.f
+# Or a custom density distribution (selected in the canvas dropdown) via
+f1.g
 
 # Draw an interaction surface
 f3 = SketulateInteraction(x_range=(0,10), y_range=(0,10), z_range=(-5,5), grid_size=5)
