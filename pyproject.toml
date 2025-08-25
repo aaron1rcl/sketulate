@@ -1,4 +1,35 @@
 [build-system]
-requires = ["setuptools", "wheel"]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "sketulate"            
+version = "0.1.0"
+description = "Sketchable function and density simulations for data science"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { file = "LICENSE" }
+authors = [{ name="Your Name", email="you@example.com" }]
+dependencies = [
+  'numpy==2.0.0',
+	'ipywidgets',
+	'ipycanvas',
+  'matplotlib',
+  'scipy',
+  'plotly',
+	'scikit-learn'
+]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+]
+
+[project.urls]
+Homepage = "https://github.com/aaron1rcl/sketulate"
+Issues = "https://github.com/aaron1rcl/sketulate/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["sketulate"]        # if using src layout
+
 
