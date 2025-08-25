@@ -108,7 +108,6 @@ class Sketulate:
         print("Drawing finished, press Accept.")
 
     def accept(self, callback):
-        """Set function to call when Accept is pressed"""
         self.accept_callback = callback
 
     def _on_accept(self, b=None):
@@ -116,9 +115,7 @@ class Sketulate:
             xs, ys = self.get_points()
             self.accept_callback(self.mode.value, (xs, ys))
         self.accept_btn.disabled = True
-        print("accept callback")
         self.get_points()
-        print(self.mode.value)
         if self.mode.value == 'function':
           self.fit_piecewise_linear()
         elif self.mode.value == 'density':
@@ -151,7 +148,7 @@ class Sketulate:
       self.f = model
 
     def fit_density(self):
-        
+
       # Ensure the density is non-negative
       ys_d = np.maximum(self.y, 0)
 

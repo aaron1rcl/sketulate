@@ -47,7 +47,6 @@ class SketulateInteraction:
         self.f = None
         self.linear_plane = None
 
-    # ---------------- Sliders ----------------
     def _make_slider(self, i, j):
         slider = FloatSlider(
             value=0,
@@ -66,7 +65,6 @@ class SketulateInteraction:
         slider.observe(update, names="value")
         return slider
     
-    # ---------------- Plotting ----------------
     def _plot_surface(self):
         # Only clear/redraw the PLOT area, not the whole cell
         with self.plot_out:
@@ -76,9 +74,7 @@ class SketulateInteraction:
             ax.plot_surface(self.X, self.Y, self.Z, cmap="viridis")
             ax.set_zlim(*self.z_range)
             plt.show()
-            # (Optional) plt.close(fig)
 
-    # ---------------- Accept ----------------
     def _on_accept(self, b):
         self.x = self.X.flatten()
         self.y = self.Y.flatten()
@@ -91,9 +87,8 @@ class SketulateInteraction:
         self.linear_plane, _, _, _ = np.linalg.lstsq(A, self.z, rcond=None)
 
         with self.log_out:
-            print("✅ Surface accepted. ND linear interpolator with linear extrapolation ready.")
+            print("Surface accepted. ND linear interpolator with linear extrapolation ready.")
     
-    # ---------------- Prediction ----------------
     def predict(self, x_new, y_new):
         x_new = np.array(x_new)
         y_new = np.array(y_new)
@@ -105,7 +100,6 @@ class SketulateInteraction:
             z_pred[nan_mask] = a*x_new[nan_mask] + b*y_new[nan_mask] + c
         return z_pred
     
-    # ---------------- Visualize fitted ----------------
     def plot_fitted_surface(self, n_points=50):
         x_fine = np.linspace(*self.x_range, n_points)
         y_fine = np.linspace(*self.y_range, n_points)
@@ -119,7 +113,6 @@ class SketulateInteraction:
                xlim=self.x_range, ylim=self.y_range, zlim=self.z_range)
         plt.show()
     
-    # ---------------- Public ----------------
     def sketch(self):
         display(self.ui)        # display once
         self._plot_surface()    # initial draw
