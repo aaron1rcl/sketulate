@@ -1,13 +1,14 @@
 # Sketulate
 
-**Sketulate** is a Python package for interactive function, surface, and density simulation directly in Jupyter notebooks. Draw functions, surfaces, or densities with your mouse, convert them into callable functions or interpolators, and simulate data for experiments, modeling, or teaching.
+**Sketulate** is a Python package for interactive function, surface, and density simulation directly in Jupyter notebooks. Draw functions, surfaces, or densities with your mouse, convert them into callable functions or density distributions, and simulate data for experiments, modeling, or teaching.
 
 ## Features
 
-- Draw univariate functions interactively (`Sketulate`)  
-- Draw 2D surfaces / interactions (`SketulateInteraction`)  
-- Linear ND interpolation with linear extrapolation for surfaces  
-- Works seamlessly in Jupyter Notebook and JupyterLab  
+- Sketch univariate functions interactively (`Sketulate`)  
+- Sketch 2D surfaces / interactions effects (`SketulateInteraction`)  
+- Sketch density distributions
+- Generates easy to use functions and sampleable density distributions
+- Works seamlessly in Jupyter Notebook
 - Easy integration for synthetic data generation  
 
 ## Installation
@@ -45,4 +46,11 @@ f3.sketch()  # Interactive surface with sliders
 
 #### Put it all together and easily simulate some data
 ![Sketch a Function](examples/images/simulate_data.png)
+
+
+## Technical Note
+For this version the sketches are modelled via piecewise linear basis functions using sklearn.
+Interaction surfaces are modelled using the LinearND interpolator from scipy.
+In addition, linear extrapolation is, by default, provided outside of the given ranges. Careful!
+
 
