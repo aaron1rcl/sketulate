@@ -151,6 +151,7 @@ class Sketulate:
       self.f = model
 
     def fit_density(self):
+        
       # Ensure the density is non-negative
       ys_d = np.maximum(self.y, 0)
 

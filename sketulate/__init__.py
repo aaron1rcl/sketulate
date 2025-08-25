@@ -1,3 +1,3 @@
 from .functions import Sketulate
-from .interaction import SketulateInteraction
+from .interactions import SketulateInteraction
 

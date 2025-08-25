@@ -10,15 +10,15 @@ setup(
     long_description_content_type='text/markdown',
     url='https://github.com/aaron1rcl/sketulate',
     packages=find_packages(),
-    python_requires='>=3.8',
+    python_requires='>=3.11.0',
     install_requires=[
-        'numpy',
-        'ipywidgets',
-        'ipycanvas',
+        'numpy==2.0.0',
+	'ipywidgets',
+	'ipycanvas',
         'matplotlib',
         'scipy',
         'plotly',
-	'sklearn'
+	'scikit-learn'
     ],
     classifiers=[
         "Programming Language :: Python :: 3",
