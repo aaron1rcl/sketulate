@@ -31,7 +31,9 @@ f1.sketch()
 # F1 is a now a ready to use function via:
 f1.f
 # f takes the form of a sklearn pipeline object,so you need to call predict on new data:
-f1.f.predict()
+import numpy as np
+x = np.linspace(0,1,100)
+f1.f.predict(x.reshape(-1,1))
 # Or a custom density distribution (selected in the canvas dropdown) via:
 f1.g
 # Draw 100 samples from g  by calling:
