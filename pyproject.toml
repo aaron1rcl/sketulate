@@ -9,7 +9,7 @@ description = "Sketchable function and density simulations for data science"
 readme = "README.md"
 requires-python = ">=3.11"
 license = { file = "LICENSE" }
-authors = [{ name="Your Name", email="you@example.com" }]
+authors = [{ name="Aaron", email="aaron_rcl@hotmail.com" }]
 dependencies = [
   'numpy==2.0.0',
 	'ipywidgets',
@@ -30,6 +30,6 @@ Homepage = "https://github.com/aaron1rcl/sketulate"
 Issues = "https://github.com/aaron1rcl/sketulate/issues"
 
 [tool.hatch.build.targets.wheel]
-packages = ["sketulate"]        # if using src layout
+packages = ["sketulate"]
 
 
