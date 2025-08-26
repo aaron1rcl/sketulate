@@ -20,7 +20,7 @@ pip install sketulate
 from sketulate import Sketulate, SketulateInteraction
 
 # Draw a univariate function
-f1 = Sketulate(x_min=0, x_max=10, y_min=-5, y_max=5)
+f1 = Sketulate()
 f1.sketch()
 ```
 
@@ -28,11 +28,14 @@ f1.sketch()
 ![Sketch a Function](examples/images/draw_a_function.png)
 
 ```python
-f1.accept(callback)  # After drawing, click Accept
-# F1 is a now a ready to use function via
+# F1 is a now a ready to use function via:
 f1.f
-# Or a custom density distribution (selected in the canvas dropdown) via
+# f takes the form of a sklearn pipeline object,so you need to call predict on new data:
+f1.f.predict()
+# Or a custom density distribution (selected in the canvas dropdown) via:
 f1.g
+# Draw 100 samples from g  by calling:
+f1.g(100)
 ```
 ![Sketch a Density](examples/images/draw_a_density.png)
 
