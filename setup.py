@@ -12,13 +12,14 @@ setup(
     packages=find_packages(),
     python_requires='>=3.11.0',
     install_requires=[
-        'numpy==2.0.0',
-	'ipywidgets',
+        'numpy>=2.0.0',
+	'ipywidgets>=8.0.0',
 	'ipycanvas',
         'matplotlib',
         'scipy',
         'plotly',
-	'scikit-learn'
+	'scikit-learn',
+	'jupyter>=7.0.5',
     ],
     classifiers=[
         "Programming Language :: Python :: 3",
