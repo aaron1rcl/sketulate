@@ -13,7 +13,7 @@
 
 ## Installation
 
-```bash
+```python
 pip install sketulate
 
 ## Quick Example
@@ -27,7 +27,7 @@ f1.sketch()
 
 ![Sketch a Function](examples/images/draw_a_function.png)
 
-``` bash
+```python
 f1.accept(callback)  # After drawing, click Accept
 # F1 is a now a ready to use function via
 f1.f
@@ -36,7 +36,7 @@ f1.g
 ```
 ![Sketch a Density](examples/images/draw_a_density.png)
 
-``` bash
+```python
 # Draw an interaction surface
 f3 = SketulateInteraction(x_range=(0,10), y_range=(0,10), z_range=(-5,5), grid_size=5)
 f3.sketch()  # Interactive surface with sliders
@@ -52,5 +52,3 @@ f3.sketch()  # Interactive surface with sliders
 For this version the sketches are modelled via piecewise linear basis functions using sklearn.
 Interaction surfaces are modelled using the LinearND interpolator from scipy.
 In addition, linear extrapolation is, by default, provided outside of the given ranges. Careful!
-
-
