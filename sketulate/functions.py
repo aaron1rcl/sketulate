@@ -7,9 +7,6 @@ from sklearn.linear_model import LinearRegression
 from sklearn.pipeline import make_pipeline
 import pickle
 from mpl_toolkits.mplot3d import Axes3D
-from ipycanvas import Canvas
-from ipywidgets import VBox, HBox, Button, FloatText, Dropdown
-import numpy as np
 from scipy.interpolate import interp1d
 
 
