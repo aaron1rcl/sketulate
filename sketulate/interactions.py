@@ -1,14 +1,10 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from ipywidgets import FloatSlider, HBox, VBox, Layout, Button
 from IPython.display import display, clear_output
 from scipy.interpolate import LinearNDInterpolator
-
-import numpy as np
-import matplotlib.pyplot as plt
 from ipywidgets import FloatSlider, Button, Layout, VBox, HBox, Output
-from IPython.display import display, clear_output
-from scipy.interpolate import LinearNDInterpolator
+
+
 
 class SketulateInteraction:
     def __init__(self, x_range=(-5,5), y_range=(-5,5), z_range=(-5,5), grid_size=5):
