@@ -133,6 +133,36 @@ class Sketulate:
         self.x = xs
         self.y = ys
 
+    def save_state(self):
+        """Return a dictionary of state for serialization: x_min, x_max, y_min, y_max, x, y, is_function."""
+        return {
+            "x_min": self.x_min.value,
+            "x_max": self.x_max.value,
+            "y_min": self.y_min.value,
+            "y_max": self.y_max.value,
+            "x": self.x.tolist() if self.x is not None else None,
+            "y": self.y.tolist() if self.y is not None else None,
+            "is_function": self.mode.value == "function",
+        }
+
+    def load_state(self, state):
+        """Restore state from a saved state dict and run the appropriate fitting function."""
+        self.x_min.value = state["x_min"]
+        self.x_max.value = state["x_max"]
+        self.y_min.value = state["y_min"]
+        self.y_max.value = state["y_max"]
+        self.mode.value = "function" if state["is_function"] else "density"
+        if state["x"] is not None and state["y"] is not None:
+            self.x = np.array(state["x"])
+            self.y = np.array(state["y"])
+            if state["is_function"]:
+                self.fit_piecewise_linear()
+            else:
+                self.fit_density()
+        else:
+            self.x = None
+            self.y = None
+
     def fit_piecewise_linear(self, n_knots=20):
       sort_idx = np.argsort(self.x)
       xs_sorted, ys_sorted = self.x[sort_idx], self.y[sort_idx]

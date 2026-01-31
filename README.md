@@ -15,6 +15,7 @@
 
 ```python
 pip install sketulate
+```
 
 ## Quick Example
 from sketulate import Sketulate, SketulateInteraction
@@ -52,6 +53,44 @@ f3.sketch()  # Interactive surface with sliders
 #### Put it all together and easily simulate some data
 ![Sketch a Function](examples/images/simulate_data.png)
 
+## Saving and loading state
+
+You can save a Sketulate (or SketulateInteraction) state to a dictionary and persist it as JSON, then restore it later.
+
+**1. Save the state** from your sketulate object:
+
+```python
+from sketulate import Sketulate
+import json
+
+sk = Sketulate()
+sk.sketch()
+# ... draw and accept a function or density ...
+
+state = sk.save_state()
+```
+
+**2. Write the state to a JSON file:**
+
+```python
+with open("sketulate_state.json", "w") as f:
+    json.dump(state, f, indent=2)
+```
+
+**3. Load the state from JSON** (e.g. in a new session or notebook):
+
+```python
+with open("sketulate_state.json", "r") as f:
+    state = json.load(f)
+```
+
+**4. Load the state into a Sketulate object** and restore the fitted function or density:
+
+```python
+sk_restored = Sketulate()
+sk_restored.load_state(state)
+# sk_restored.f (function) or sk_restored.g (density) is now available
+```
 
 ## Technical Note
 For this version the sketches are modelled via piecewise linear basis functions using sklearn.
