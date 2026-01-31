@@ -13,7 +13,7 @@
 
 ## Installation
 
-```bash
+```python
 pip install sketulate
 ```
 
