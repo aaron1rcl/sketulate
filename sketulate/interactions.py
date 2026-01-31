@@ -84,7 +84,55 @@ class SketulateInteraction:
 
         with self.log_out:
             print("Surface accepted. ND linear interpolator with linear extrapolation ready.")
-    
+
+    def save_state(self):
+        """Return a dictionary of state for serialization: x_min, x_max, y_min, y_max, z_min, z_max, grid_size, x, y, z."""
+        return {
+            "x_min": self.x_range[0],
+            "x_max": self.x_range[1],
+            "y_min": self.y_range[0],
+            "y_max": self.y_range[1],
+            "z_min": self.z_range[0],
+            "z_max": self.z_range[1],
+            "grid_size": self.grid_size,
+            "x": self.x.tolist() if self.x is not None else None,
+            "y": self.y.tolist() if self.y is not None else None,
+            "z": self.z.tolist() if self.z is not None else None,
+        }
+
+    def load_state(self, state):
+        """Restore state from a saved state dict and rebuild the interpolator."""
+        self.x_range = (state["x_min"], state["x_max"])
+        self.y_range = (state["y_min"], state["y_max"])
+        self.z_range = (state["z_min"], state["z_max"])
+        self.X, self.Y = np.meshgrid(
+            np.linspace(*self.x_range, self.grid_size),
+            np.linspace(*self.y_range, self.grid_size),
+        )
+        if state["x"] is not None and state["y"] is not None and state["z"] is not None:
+            if state["grid_size"] != self.grid_size:
+                raise ValueError(
+                    f"Saved state has grid_size {state['grid_size']}, but this object has grid_size {self.grid_size}. "
+                    "Create a SketulateInteraction with the same grid_size first."
+                )
+            self.x = np.array(state["x"])
+            self.y = np.array(state["y"])
+            self.z = np.array(state["z"])
+            self.Z = self.z.reshape(self.grid_size, self.grid_size)
+            for k in range(len(self.sliders)):
+                self.sliders[k].value = self.Z.flat[k]
+            points = np.column_stack([self.x, self.y])
+            self.f = LinearNDInterpolator(points, self.z, fill_value=np.nan)
+            A = np.column_stack([self.x, self.y, np.ones_like(self.x)])
+            self.linear_plane, _, _, _ = np.linalg.lstsq(A, self.z, rcond=None)
+        else:
+            self.Z = np.zeros_like(self.X)
+            for k in range(len(self.sliders)):
+                self.sliders[k].value = 0.0
+            self.x = self.y = self.z = None
+            self.f = None
+            self.linear_plane = None
+
     def predict(self, x_new, y_new):
         x_new = np.array(x_new)
         y_new = np.array(y_new)
