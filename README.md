@@ -18,7 +18,7 @@ pip install sketulate
 ```
 
 ## Quick Example
-´´´python
+```python
 from sketulate import Sketulate, SketulateInteraction
 
 # Draw a univariate function
